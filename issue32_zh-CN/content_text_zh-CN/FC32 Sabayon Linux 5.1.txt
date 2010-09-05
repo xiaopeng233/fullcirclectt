@@ -1,0 +1,4 @@
+
+Sabayon Linux founder Fabio Erculiani has announced the availability of a "Gaming" Edition of version 5.1 of his popular Linux distribution. Sabayon [..] is intended to provide a " Complete out-of-the-box experience" while being both stable and versatile. The [...] release is based on Sabayon Linux 5.1 GNOME and features [...] turn-based tactical strategy game called Battle for Wesnoth, the Warsow first person shooter and a 2D platformer called Wormux. The turn-based artillery game Scorched 3D and OpenArena first person shooter based on the Quake 3 engine are also included. Erculiani hopes that the release, which he says "comes straight from the North Pole", will make sure that no one gets "bored during this hoilday time". More details about the release, including a full list of games, can be found in the original release announcement and list of packages. Sabayon Linux 5.1 "Gaming" Edition is available to download for 32-bit systems.
+
+Source: h-online.com 

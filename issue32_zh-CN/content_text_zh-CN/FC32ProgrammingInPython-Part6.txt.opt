@@ -1,0 +1,241 @@
+ProgrammingInPythonPart6
+
+
+我希望你自从上次我们见面以来一直在使用着BoaConstructor。这次我们还是同往常一样做一些GUI编程。首先，我们编一个非常简单的程序，它将显示一个框架，并且允许你点击一个按钮，然后弹出另一个框架。上一次我们做了一个消息盒子，这一次我们将做一个完全分离的窗口，当我们做一个有很多框架和窗口的应用程序时，这将很有用处。那么，我们开始吧！
+
+
+使用Shell命令打开BoaConstructor，并且使用快捷键(Ctrlw)在编辑框架中关闭所有的标签。这些将确保我们从零开始。现在，通过单击wx.App按钮新建一个工程(如果有需要的话请查看上次的文章)
+
+
+在做其它事之前，将框架保存为“FrameMain.py“，将App1保存为"Gui2.py"，这个很重要。GUI2标签在编辑框中被选择后，移到工具栏框架，回到新的标签，通过单击wx.Fram我们在工程里新增另一个框架(这个按钮挨着wx.App，在其右边)。请确保“应用”标签显示的两个框架在模块列下。现在回到新的框架，将其保存为"FrameSecond.py"
+
+{INSERTscreenshot_001.pngHERE}
+
+
+接下来，在设计器中打开FrameMain，给框架增加一个wx.Panel，调整其大小使panel能够覆盖框架。其后，我们要调整一些配置——上一次我们没有做这些。在inspector框架中，确保选中Constr标签，将标题设为"MainFrame"，名字改为"FrameMain"。我们将会在后面探讨一些命名规则。通过单击大小选择框将大小设置为400x340。高度应该是400，宽度为340：
+
+{INSERTscreenshot_002.pngHERE}
+
+
+现在单击Props标签，点击Centeredproperty，将其设置为wx.BOTH。单击忽略标记检查并保存你的作品。通过单击黄色箭头按钮来运行你的程序。我们的程序将显示在屏幕的中心，其标题为"MainFrame"。单击右上方的"X"关闭程序。
+
+
+将FrameMaim重新载入设计器，给框架增加两个wx.Buttons，在接近框架中心的位置一个重叠在另一个上。选择上面的按钮，命名为"btnShowNew"，然后在Inspector框架中将Constr标签中将标签设为"Showthetherframe"。使用快捷键Shift+Arrow重新设置按钮的大小使所有的文字都能看见，然后使用快捷键Ctrl+Arrow将其移动到框架的中间。选择底下的按钮，命名为"btnExit"，将标签设置为"Exit"。忽略拼写检查，保存并运行以查看你的更改。退出我们的程序，然后回到设计器，我们将增加按钮点击响应事件。单击ButtonEvent，双击wx.Evt_BUTTON。注意，应该会有"OnBtnShowNewButton"在下面。接下来，选择btnExit按钮，做用样的事情，确保它显示了"OnBtnExitButton"。忽略拼写检查，保存。然后回到编辑框，滑到编辑框的底部。
+
+
+确保你已有两个事件方法，也就是我们才创建的那两个。这是我们的框架目前为止应该有的样子
+
+{INSERTscreenshot_003.pngHERE}
+
+
+现在我们来处理其它的框架，在设计器中打开FrameSecond。将其命名为"FrameSecond"，标题命名为"SecondFrame"。在wx.BOTH中间增加wx.Button,将其居中对着框架中底部，命名为"btnFSExit",将标题改为"Exit"，为其设置一个按钮事件。接下来，在接近框架的中部偏上增加一个wx.staticText控件,命名为"stHiThere"，将标签设为"Hithere...I'mthesecondform!"，然后将字体设为Sans,14像素，wxBOLD磅。重新设置位置使其在表中的左右居中，你可以通过取消位置属性而使用X坐标表示左右，Y坐标表示上下，直到你满意位置。。忽略拼写检查并保存。
+
+{INSERTscreenshot_004.pngHERE}
+
+
+以上我们设计来我们的表单，接下来我们将建立一个中间层，将他们绑到一起。
+
+
+在编辑框中，点击GUI2标签，然后在其下面单击Source标签。在行下会有提示"importFrameMain"，添加"importFrameSecond"。保存更改。接下来，选择"FramMain"标签，会有提示"importwx"，添加一行后提示"importFrameSecond"，再下来，滑到底部，找到此行，上面提示："def_init_(self,parent):"，在"self._init_ctrls(parent)"行后添加一行"self.Fs=FrameSecond.FrameSecond(self)".在“defOnBtnShowNewButton(self,event):”事件下添加注释“event.Skip()”并且添加以下两行：
+
+self.Fs.Show()
+
+self.Hide()
+
+最后，在“OnBtnExitButton”方法下，注释掉“event.Skip()”，添加一行：“self.Close()”
+
+
+一切准备就绪？好。我们要做的第一件事是确保让应用程序知道我们的程序中将有两个表单，这就是我们在GUI2文件中导入FrameMain和FrameSecond的原因。接下来，为了在以后调用它，我们为FrameSecond导入一个参考到FrameMain中。我们在"_init_"方法中初始化它。“OnBtnShowNewButton”事件中我们告诉它，当按钮被单击后，我们想要第二个框架首先被显示，并且隐藏主框架。最后我们有一个程序退出提示，当点击Exit按钮后。
+
+
+现在，选择FrameSecond的代码，此处的改变将会相对少些。在“_init_”方法后，添加一行：“self.parent=parent”，它会添加一个可变的self.parent。最后，在为FSExitButton所写的事件响应方法后注释掉“event.Skip()”行，然后添加如下两行：
+
+self.parent.Show()
+
+self.Hide()
+
+牢记我们在显示第二个框架时隐藏了主框架，所以我们必须重新显示它。最后我们隐藏第二个框架，保存你的更改。
+
+
+如下是让你验证所有更改的代码：
+
+GUI2code:
+
+#!/usr/bin/envpython
+
+#Boa:App:BoaApp
+
+
+importwx
+
+
+importFrameMain
+
+importFrameSecond
+
+
+modules={u'FrameMain':[1,'MainframeofApplication',u'FrameMain.py'],
+
+u'FrameSecond':[0,'',u'FrameSecond.py']}
+
+
+classBoaApp(wx.App):
+defOnInit(self):
+self.main=FrameMain.create(None)
+self.main.Show()
+self.SetTopWindow(self.main)
+returnTrue
+
+defmain():
+
+application=BoaApp(0)
+
+application.MainLoop()
+
+
+if__name__=='__main__':
+
+main()
+
+FrameMaincode:
+
+
+#Boa:Frame:FrameMain
+
+
+importwx
+
+importFrameSecond
+
+
+defcreate(parent):
+
+returnFrameMain(parent)
+
+
+[wxID_FRAMEMAIN,wxID_FRAMEMAINBTNEXIT,wxID_FRAMEMAINBTNSHOWNEW,
+
+wxID_FRAMEMAINPANEL1,
+
+]=[wx.NewId()for_init_ctrlsinrange(4)]
+
+
+classFrameMain(wx.Frame):
+def_init_ctrls(self,prnt):
+#generatedmethod,don'tedit
+wx.Frame.__init__(self,id=wxID_FRAMEMAIN,name=u'FrameMain',
+parent=prnt,pos=wx.Point(846,177),size=wx.Size(400,340),
+style=wx.DEFAULT_FRAME_STYLE,title=u'MainFrame')
+self.SetClientSize(wx.Size(400,340))
+self.Center(wx.BOTH)
+self.panel1=wx.Panel(id=wxID_FRAMEMAINPANEL1,name='panel1',
+parent=self,pos=wx.Point(0,0),size=wx.Size(400,340),
+style=wx.TAB_TRAVERSAL)
+self.btnShowNew=wx.Button(id=wxID_FRAMEMAINBTNSHOWNEW,
+label=u'Showtheotherframe',name=u'btnShowNew',
+parent=self.panel1,pos=wx.Point(120,103),size=wx.Size(168,29),
+style=0)
+self.btnShowNew.SetBackgroundColour(wx.Colour(25,175,23))
+self.btnShowNew.Bind(wx.EVT_BUTTON,self.OnBtnShowNewButton,
+id=wxID_FRAMEMAINBTNSHOWNEW)
+self.btnExit=wx.Button(id=wxID_FRAMEMAINBTNEXIT,label=u'Exit',
+name=u'btnExit',parent=self.panel1,pos=wx.Point(162,191),
+size=wx.Size(85,29),style=0)
+self.btnExit.SetBackgroundColour(wx.Colour(225,218,91))
+self.btnExit.Bind(wx.EVT_BUTTON,self.OnBtnExitButton,
+id=wxID_FRAMEMAINBTNEXIT)
+
+def__init__(self,parent):
+self._init_ctrls(parent)
+self.Fs=FrameSecond.FrameSecond(self)
+
+defOnBtnShowNewButton(self,event):
+#event.Skip()
+self.Fs.Show()
+self.Hide()
+
+defOnBtnExitButton(self,event):
+#event.Skip()
+self.Close()
+FrameSecondcode:
+
+#Boa:Frame:FrameSecond
+
+
+importwx
+
+
+defcreate(parent):
+
+returnFrameSecond(parent)
+
+
+[wxID_FRAMESECOND,wxID_FRAMESECONDBTNFSEXIT,wxID_FRAMESECONDPANEL1,
+
+wxID_FRAMESECONDSTATICTEXT1,
+
+]=[wx.NewId()for_init_ctrlsinrange(4)]
+
+
+classFrameSecond(wx.Frame):
+def_init_ctrls(self,prnt):
+#generatedmethod,don'tedit
+wx.Frame.__init__(self,id=wxID_FRAMESECOND,name=u'FrameSecond',
+parent=prnt,pos=wx.Point(849,457),size=wx.Size(419,236),
+style=wx.DEFAULT_FRAME_STYLE,title=u'SecondFrame')
+self.SetClientSize(wx.Size(419,236))
+self.Center(wx.BOTH)
+self.SetBackgroundStyle(wx.BG_STYLE_COLOUR)
+
+self.panel1=wx.Panel(id=wxID_FRAMESECONDPANEL1,name='panel1',
+parent=self,pos=wx.Point(0,0),size=wx.Size(419,236),
+style=wx.TAB_TRAVERSAL)
+
+
+self.btnFSExit=wx.Button(id=wxID_FRAMESECONDBTNFSEXIT,label=u'Exit',
+name=u'btnFSExit',parent=self.panel1,pos=wx.Point(174,180),
+size=wx.Size(85,29),style=0)
+self.btnFSExit.Bind(wx.EVT_BUTTON,self.OnBtnFSExitButton,
+id=wxID_FRAMESECONDBTNFSEXIT)
+
+self.staticText1=wx.StaticText(id=wxID_FRAMESECONDSTATICTEXT1,
+label=u"Hithere...I'mthesecondform!",name='staticText1',
+parent=self.panel1,pos=wx.Point(45,49),size=wx.Size(336,23),
+style=0)
+self.staticText1.SetFont(wx.Font(14,wx.SWISS,wx.NORMAL,wx.BOLD,
+False,u'Sans'))
+
+def__init__(self,parent):
+self._init_ctrls(parent)
+self.parent=parent
+defOnBtnFSExitButton(self,event):
+#event.Skip()
+self.parent.Show()
+self.Hide()
+
+Nowyoucanrunyourapplication.Ifeverythingwentright,youwillbeabletoclickonbtnShownNew,andseethefirstframedisappearandsecondframeappear.ClickingontheExitbuttononthesecondframewillcausethatframetodisappearandthemainframetoreappear.ClickingontheExitbuttononthemainframewillclosetheapplication.
+
+现在你可以运行你的程序了。如果所有的事情都OK的话，你将能单击btnShownNew按钮，看到第一个框架消失，第二个框架出现。单击Exit按钮，第二个框架将会导致本身消失，主框架重新出现。单击主框架上的Exit按钮，将会关闭应用程序。
+
+
+在开始我说过，我们将会讨论命名规则。还记得在以前，我们讨论过注释你的代码吗？那么，通过给GUI控件使用良好的命名格式的名字，你的代码本身就是自我说明书。如果你将你的控件名字命名为staticText1，button1或者其它别的名字。当你创建一个拥有很多控件的复杂框架事，特别是当里面有很多文本框或者按钮时，此时命名一些有含义的名字将会很重要。如果仅仅只有你一个人看代码，那么命名将没有这么重要，但是如果有人以后有人会参与你的项目，好的控件名字将会帮助他们更好的理解代码。因此，使用如下格式的命名：
+
+ControltypeNameprefix
+
+Statictextst_
+
+Buttonbtn_
+
+TextBoxtxt_
+
+CheckBoxchk_
+
+RadioButtonrb_
+
+FrameFrm_orFrame_
+
+
+在成为程序员的过程中，你或许会形成你自己的命名规则，在某些情况下你的老板或许有自己的命名规则
+
+
+下一次，我们将会暂时抛开GUI编程，集中在数据库编程上。同时，在你的系统中安装上pythonapsw和pythonmysqldb。SQLite的话还需要sqlite和sqlitebrowser。如果你也想使用MySql做实验的话，这将是一个好主意。所有的东西都能通过访问Synaptic得到。

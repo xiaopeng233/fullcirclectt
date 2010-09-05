@@ -1,0 +1,34 @@
+MusicPlayerDaemon
+
+
+I've always been a fan of MOC (Music on Console) because it is lightweight, and it works even from a tty screen. Lately, I have noticed a lot of references to MPD (Music Player Daemon) on the ArchLinux Forums. One comment that intrigued me was that MPD allows you to pause music playback, restart the computer, then pick up where you left off. This is useful for me, since I hate having to find the song again if I shut off my netbook/PC in mid-song for whatever reason. After reading the comment, I pulled up the wiki page for MPD to get specific instructions on installing and using it. Since MPD acts as a daemon (much like gdm, ssh, networkmanager, or any other file in /etc/init.d/), it requires some frontend program that allows you to access the daemon. MPD mainly just creates a database of songs (called ¡°mpd.db¡±), and sets up an mpd user who has rights to the folder (on my system it's /var/lib/mpd/). There's also a configuration file /etc/mpd.conf, which holds the path to the music folder, the playlist folder, the database folder, the mpd user, and so forth. Those of you who, like me, enjoy having configuration files instead of GUI-based configuration windows, will enjoy MPD's clear configuration file.
+
+Now, on to the frontend. The frontend I chose was ncmpcpp - a re-write of ncmpc (an ncurses-based music player) in C++. However, there are many more to choose from. Here are some of them:
+
+mpc, a command-line client (you'll probably want this one no matter what)
+ncmpc, an ncurses client (handy for running in a console, http://hem.bredband.net/kaw/ncmpc/
+ncmpcpp, a clone of ncmpc with some new features written in C++ (http://unkart.ovh.org/ncmpcpp/)
+pms, an ncurses client (highly configurable and accessible - Sourceforge website of pms is http://pms.sourceforge.net/
+ario, a GTK+ client with a Rhythmbox-like library browser (http://ario-player.sourceforge.net/)
+sonata, a Python GTK+ client (http://sonata.berlios.de/)
+gmpc, a GNOME client (http://gmpcwiki.sarine.nl/index.php?title=GMPC)
+QMPDClient, written with Qt 4.x. (http://bitcheese.net/wiki/QMPDClient).
+I admit, I have shamelessly copied the list from the ArchWiki, because the list is quite good and offers links to all the official websites as well. As you can see, there are command-line frontends, as well as GTK+ and QT-based clients. I choose ncmpcpp because it's a command-line program (I prefer these on my netbook) which seems to offer the most features.
+
+MPD is available from the Ubuntu repositories.
+
+Now, on to the actual program. MPD creates a very good database, and fairly quickly: it took less than a minute on my Intel Atom 1.6GHz CPU for about 7.7GB of music. It also offers lots of extra features. I noticed a reference to last.fm's database of music, although I haven't tested it, since my music is fully ID3 tagged. Also, MPD's configuration seems clean and easy, as long as you have some sort of reference to work with (highly recommended when trying new programs), and the features it offers, such as resuming playback after the PC has been powered off, are excellent. I have yet to see another music program/system that can offer the same. Of course, I don't claim to know them all, and have surely not tested even a fraction of them. That being said, after using MPD, I doubt very much I'll hunt for another music player, unless I read about one that really blows my mind. Other features that might be interesting for some people are the ability to have mpd scrobble the current song to last.fm, or have it pull and display lyrics. I'm not sure where it pulls them from, since I don't use that feature, but it does seem to be there. I'm certain that I am missing at least one or two features of MPD, since it is a fairly robust program. There is a good chance I won't know about such features until I want to use them, or until I have time to study the configuration thoroughly.
+
+[image]
+
+
+As for the client/frontend, ncmpcpp is laid out well, and the default keybindings are intuitive and very near the keybindings that MOC uses, making me feel at home. The ncurses interface seems smooth and clean (in my urxvt setup). The media database is seamlessly accessed by ncmpcpp, and adding files from the database to a playlist is painless. The only thing I haven't figured out yet is how to add the entire media database to a playlist, or play the entire database on shuffle, though I haven't missed this ability. Ncmpcpp also offers a few nice features on the side (e.g., a full-window CLI clock). Also, it contains a playlist editor so that you can edit saved playlists without having to load the entire playlist into the playlist menu, and so forth. A quick note on the screenshots: the blue with ¡°Intelligence¡± is actually my wallpaper; the terminal is transparent, thus you can see the wallpaper. However, if you set a bitmap to the urxvt window, it may show up in the background of ncmpcpp, as it seems to take over the urxvt settings.
+
+[image]
+
+
+In summary, anyone who is comfortable with or prefers command-line programs will probably have no issues using MPD and ncmpcpp, and anyone who has no problems with learning a bit along the way will have no issues setting up MPD and a frontend of their choice, as long as they follow some sort of guide for their particular release. I say ¡°their particular release¡±, since each distribution and release seems to alter things slightly on configuring/defaults, and so you may need to check up on some of those things (e.g., default mpd directory, etc.). I highly recommend this setup for those who may want to return to a song when their laptop battery dies, or when they are forced to reboot in the middle of a song. It may take a little more effort to set up at first than something like exaile, but you can save your settings by simply backing up the configuration file (or even the database file) for later use or for duplicating settings on another PC. For those of you interested, my configuration file can be found here: <insert link to configuration file here.>
+
+Links:
+http://mpd.wikia.com/wiki/Music_Player_Daemon_Wiki ¨C Community Wiki for MPD
+http://mpd.wikia.com/wiki/Clients ¨C List of clients/frontends for MPD 
