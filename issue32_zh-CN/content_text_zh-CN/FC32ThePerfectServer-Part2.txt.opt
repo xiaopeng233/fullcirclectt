@@ -1,0 +1,200 @@
+在上期的教程里，我们使用Ubuntu光盘，安装了一个简易的服务器。现在，让我们重启并进入该操作系统。>
+目录
+[隐藏]
+
+*1获取管理员权限
+*2安装SSH服务器（可选）
+*3安装Vim文本编辑器（可选）
+*4网络配置
+*5编辑源文件并更新操作系统
+*6更换默认Shell
+*7禁用AppArmor
+*8校准系统时钟
+
+获取管理员权限
+
+现在，我们可以登录先前创建的用户，如“administrator”。由于在本教程的后续步骤中，我们需要在管理员权限下运行，所以我们在执行的命令前面加上提权命令“root”，或者输入以下命令，在终端模拟器中，使自己的身份暂时更换为管理员：>
+
+sudosu
+
+我们也可以输入以下命令：
+
+sudopasswdroot
+
+然后根据提示，为其设置一个密码。这样，我们便可以直接在登录界面以“root”身份登录。但由于某种原因，Ubuntu开发团队成员，及其维护社区并不推荐这种做法。（详情可参见：http://ubuntuforums.org/showthread.php?t=765414.）>
+安装SSH服务器（可选）
+
+如果你在系统安装过程中没有选择安装OpenSSH服务，那么现在你可以输入：
+
+aptitudeinstallsshopensshserver
+
+现在，我们可以在工作站中使用PuTTY等SSH客户端，连接到刚刚所建的服务器中，并完成接下来的步骤。
+安装Vim文本编辑器（可选）
+
+在后面的教程中，我会采用Vim文本编辑器进行讲解。在Ubuntu或者其分支Debian中所默认预装的Vim软件通常出现一些难以解决的离奇问题，所以我们在这里首先安装修正后的版本：
+
+aptitudeinstallvimnox
+
+当然，如果你习惯于使用joe、nano等文本编辑器，完全可以跳过该步骤。
+
+
+网络配置
+
+由于Ubuntu安装程序已自动配置网络传输方式为动态主机设置协议（DynamicHostConfigurationProtocol,DHCP），我们只需手动填写服务器所必须的IP地址。编辑/etc/network/interfaces，并根据你的需要进行设置（这个例子中我会使用192.168.0.100为IP地址）：
+
+vi/etc/network/interfaces
+
+#Thisfiledescribesthenetworkinterfacesavailableonyoursystem
+#andhowtoactivatethem.Formoreinformation,seeinterfaces(5).
+
+#Theloopbacknetworkinterface
+autolo
+ifaceloinetloopback
+
+#Theprimarynetworkinterface
+autoeth0
+ifaceeth0inetstatic
+address192.168.0.100
+netmask255.255.255.0
+network192.168.0.0
+broadcast192.168.0.255
+gateway192.168.0.1
+
+然后以此命令重启网络服务
+
+/etc/init.d/networkingrestart
+
+接着如下所示，编辑/etc/hosts文件：
+
+vi/etc/hosts
+
+127.0.0.1localhost.localdomainlocalhost
+192.168.0.100server1.example.comserver1
+
+#ThefollowinglinesaredesirableforIPv6capablehosts
+::1localhostip6localhostip6loopback
+fe00::0ip6localnet
+ff00::0ip6mcastprefix
+ff02::1ip6allnodes
+ff02::2ip6allrouters
+ff02::3ip6allhosts
+
+现在执行命令：
+
+echoserver1.example.com>/etc/hostname
+
+随后重启服务器：
+
+reboot
+
+待到服务器重新启动，执行：
+
+hostname
+hostnamef
+
+如果配置正确，两者返回的信息应为“server1.example.com”。
+编辑源文件并更新操作系统
+
+编辑/etc/apt/sources.list，对光盘安装源加上注释或直接删除，并注意不要遗漏末位的universe和multiverse库支持。
+
+vi/etc/apt/sources.list
+
+源列表参考如下<译者注：由于地域不同等原因，如下的源列表可能并不适合于中国用户，具体请参见：http://wiki.ubuntu.org.cn/Qref/Source>：
+
+#
+#debcdrom:[UbuntuServer9.10_KarmicKoala_Releaseamd64(20091027.2)]/karmicmainrestricted
+
+#debcdrom:[UbuntuServer9.10_KarmicKoala_Releaseamd64(20091027.2)]/karmicmainrestricted
+#Seehttp://help.ubuntu.com/community/UpgradeNotesforhowtoupgradeto
+#newerversionsofthedistribution.
+
+debhttp://de.archive.ubuntu.com/ubuntu/karmicmainrestricted
+debsrchttp://de.archive.ubuntu.com/ubuntu/karmicmainrestricted
+
+##Majorbugfixupdatesproducedafterthefinalreleaseofthe
+##distribution.
+debhttp://de.archive.ubuntu.com/ubuntu/karmicupdatesmainrestricted
+debsrchttp://de.archive.ubuntu.com/ubuntu/karmicupdatesmainrestricted
+
+##N.B.softwarefromthisrepositoryisENTIRELYUNSUPPORTEDbytheUbuntu
+##team.Also,pleasenotethatsoftwareinuniverseWILLNOTreceiveany
+##revieworupdatesfromtheUbuntusecurityteam.
+debhttp://de.archive.ubuntu.com/ubuntu/karmicuniverse
+debsrchttp://de.archive.ubuntu.com/ubuntu/karmicuniverse
+debhttp://de.archive.ubuntu.com/ubuntu/karmicupdatesuniverse
+debsrchttp://de.archive.ubuntu.com/ubuntu/karmicupdatesuniverse
+
+##N.B.softwarefromthisrepositoryisENTIRELYUNSUPPORTEDbytheUbuntu
+##team,andmaynotbeunderafreelicence.Pleasesatisfyyourselfasto
+##yourrightstousethesoftware.Also,pleasenotethatsoftwarein
+##multiverseWILLNOTreceiveanyrevieworupdatesfromtheUbuntu
+##securityteam.
+debhttp://de.archive.ubuntu.com/ubuntu/karmicmultiverse
+debsrchttp://de.archive.ubuntu.com/ubuntu/karmicmultiverse
+debhttp://de.archive.ubuntu.com/ubuntu/karmicupdatesmultiverse
+debsrchttp://de.archive.ubuntu.com/ubuntu/karmicupdatesmultiverse
+
+##Uncommentthefollowingtwolinestoaddsoftwarefromthe'backports'
+##repository.
+##N.B.softwarefromthisrepositorymaynothavebeentestedas
+##extensivelyasthatcontainedinthemainrelease,althoughitincludes
+##newerversionsofsomeapplicationswhichmayprovideusefulfeatures.
+##Also,pleasenotethatsoftwareinbackportsWILLNOTreceiveanyreview
+##orupdatesfromtheUbuntusecurityteam.
+#debhttp://de.archive.ubuntu.com/ubuntu/karmicbackportsmainrestricteduniversemultiverse
+#debsrchttp://de.archive.ubuntu.com/ubuntu/karmicbackportsmainrestricteduniversemultiverse
+
+##UncommentthefollowingtwolinestoaddsoftwarefromCanonical's
+##'partner'repository.
+##ThissoftwareisnotpartofUbuntu,butisofferedbyCanonicalandthe
+##respectivevendorsasaservicetoUbuntuusers.
+#debhttp://archive.canonical.com/ubuntukarmicpartner
+#debsrchttp://archive.canonical.com/ubuntukarmicpartner
+
+debhttp://security.ubuntu.com/ubuntukarmicsecuritymainrestricted
+debsrchttp://security.ubuntu.com/ubuntukarmicsecuritymainrestricted
+debhttp://security.ubuntu.com/ubuntukarmicsecurityuniverse
+debsrchttp://security.ubuntu.com/ubuntukarmicsecurityuniverse
+debhttp://security.ubuntu.com/ubuntukarmicsecuritymultiverse
+debsrchttp://security.ubuntu.com/ubuntukarmicsecuritymultiverse
+
+接着输入：
+
+aptitudeupdate
+
+以便更新软件包数据库，此后执行：
+
+aptitudesafeupgrade
+
+这将会自动升级各软件包到最新版本，如果升级的内容是新版本的Linux内核，我们应该在结束后重新启动操作系统：
+
+reboot
+
+更换默认Shell
+
+我们默认使用的/bin/sh实际上是/bin/dash的连接符号（symlink），但/bin/bash的稳定性在一定程度上优于/bin/dash。因此，我们输入以下命令：
+
+dpkgreconfiguredash
+
+在接下来的命令行界面中，系统询问是否将/bin/sh重设为dash，我们切记不可选择同意。
+
+如果你选择了前者，接下来的ISPConfig安装可能会出现错误。
+禁用AppArmor
+
+AppArmor是一种有类于SELinux的安全扩展，它可以增强系统的安全性。但我个人认为，这对于Linux这样安全性极高的系统来说，实在显得有些多余了。它的存在反而会导致故障出现，相比它的这一劣处，它的价值便不甚明显了（你尽可以想象一下，当你的服务器出现了异常情况，你耗尽力气排查个遍，才发现一切都是由AppArmor引起的，然后还要把它一一解决的时候，你会是什么感觉）。不但如此，而且在之后安装ISPConfig时，AppArmor可能也会与其发生冲突，所以我们现在就要禁用它。
+
+我们可以通过该命令完成此操作：
+
+/etc/init.d/apparmorstop
+updaterc.dfapparmorremove
+aptituderemoveapparmorapparmorutils
+
+校准系统时钟
+
+通过网络时间协议（networktimeprotocol，NTP)来校时，是一个最为快速有效的方法，我们只需要输入：
+
+aptitudeinstallntpntpdate
+
+现在，系统时钟已经与国际时间同步了。
+
+在下期节目里，我们将一起安装Postfix、SpamAssassin、Webalizer等常用服务器软件，不见不散！

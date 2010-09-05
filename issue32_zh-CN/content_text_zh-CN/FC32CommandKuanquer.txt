@@ -1,0 +1,103 @@
+决胜命令行
+
+在我开始这期教程的主题之前，我必须承认犯了一个错误！读者 Stefan Eike 指出我在上一期的一个命令行中（如下所示）漏打一个 't':
+
+ sudo smartctl -H /dev/sda
+
+感谢 Stefan 为我指出错误，并向任何可能运行这个命令出现问题的人表示抱歉。
+
+我在11月15日收到了来自校对人员 Brain Jenkins 的一封邮件。在这封邮件中，他的观点是关于写一篇关于 GNU Screen的教程将会很受欢迎的问题，因为他已经开始使用它了并感觉它超好用。因此， Brain, 这篇文章就是你想要的！并且我必须再次感谢他提醒我GNU Screen（我每次写教程时似乎都忘了这个主题。）。在他的建议之后，我觉得写一两篇关于这个的教程是一个非常好的主意（下个月我很有可能还会继续跟上一篇信息更多的文章作为这篇文章的继续），我决定在接下来的几个星期里面尽可能多的使用GNU Screen，尽我所能将其配置到最佳状态——毕竟，要是没有亲自用过一个程序的话，要写写东西出来还是非常困难的。
+
+在本文中，我将着重于安装、使用（键盘绑定之类）、设置.screenrc和Screen的一些使用技巧。下期将会重点关注Screen的高级应用（多用户会话、通过SSH使用Screen等等）。这样的话，每个人对理解下期内容都会有所准备，然后我就可以直接解释如何和为什么，而不是一个劲解释Screen的使用。那么，什么是GNU Screen呢？GNU Screen是一个终端倍增器。为防止这个说法你还不能理解，终端倍增器事实上会在一个终端模拟器/tty屏幕上创建一些“虚拟终端”，这些虚拟终端可以被附着到一个新的终端或者从一个终端拆分出来，也可以是从/到另外一个用户等等。你可能会想：那不就是开了两个或者更多的终端吗？我承认这样可以实现同样地效果，我有一次使用很多终端的习惯，但是Screen可以让你在一个终端进程中开启更多的虚拟终端，和标签的概念比较相似（是的，我知道也有些终端模拟器有标签功能）。然而，Screen允许你分离/附着整个会话（包括标签）到一个新的终端、账户或者tty屏幕。
+
+当然，了解Screen的最好方式就是亲自安装并使用。安装Screen到你的系统，你可以运行如下命令：
+
+ sudo apt-get install screen
+
+安装成功后，你就可以运行下面的命令开始你的第一次Screen之旅了： screen
+
+你将看到开启了一个新的空白终端？Screen确实和普通的终端看起来没有什么两样（在没有加载参数或者配置的情况下），不过你可以试着敲一下C-a来确定你运行的确实是Screen（Ctrl + a然后是d）你将看到你打开的终端上面有一行写着
+
+ [detached]
+
+意思是说你的screen会话已经被分离开了，但是没有终结。
+
+现在，要看到Screen完整的快捷键，你需要将进入扩展阅读部分中的链接。我发现自己用的非常多的一些快捷键是：
+
+Ctrl + a, d – 分离一个screen ctrl + a, 0-9 – 跳转到数字表示的screen会话中的虚拟终端 ctrl + a, ctrl + a – 切换到前一个屏幕 ctrl + a, ctrl + c – 创建一个有shell的新窗口并切换到其中 Ctrl + a, k – 关闭当前窗口（在你分离屏幕之后就将其关闭）你可能会奇怪要怎么把它找回来。如果在终端中输入下面命令，你会看到一个screen的列表。
+
+screen -ls
+
+我的列表看起来像是下面的样子: There is a screen on: 17153.pts-0.lswest-netbook (Detached) 1 Socket in /tmp/screens/S-lswest.
+
+如果你在screen会话内输入那个命令的话结果会是：
+
+There is a screen on:
+
+       17153.pts-0.lswest-netbook      (Attached)
+
+1 Socket in /tmp/screens/S-lswest.
+
+看到这个列表的时候你可能有些迷惑了。事实上，显示出来的是每个screen会话在/tmp/screens /S-<username>/中创建的文件。同时也显示出了那个screen当时的状态（附着、分离等）。要重新连接或者“附着”一个 screen会话，你要输入如下命令： screen -r <name of screen>
+
+所以，接着上面的例子，命令会是： screen -r 17153.pts-0.lswest-netbook
+
+当然我们都很懒，所以我们还是坚持使用数字ID（现在的情况是17153）。ID对于处理本地screen会话来说已经够用了，但是，我想要是你有远程连接到一个会话的需求的话，剩下的内容会很有用。
+
+一个稍微高级一点的大家可能会觉得很有用的内容就是在他们的bash或者zsh提示符处显示screen窗口号码（我是zsh的狂人粉丝）。你可以在promot行处加入“$WINDOW" 变量，这样就能显示出当前打开窗口的号码（比如你在一个screen绘画中有三个窗口，你目前处于窗口1中的shell中（从0开始计算，所以1应该是第二个打开的），这个值就是1）。我的提示符设置如下所示： if [ x$WINDOW != x ]; then
+
+   #┌─[5:lswest@lswest-netbook:~]-[15:21:07] 
+   #└─> 
+   export PS1="%{$fg[white]%}┌─[%{$fg[cyan]%}$WINDOW%{$fg[white]%}:%{$fg[green]%}%n%{$fg[cyan]%}@%{$fg[green]%}%m%{$fg[white]%}:%{$fg[yellow]%}%~%{$fg[white]%}]%{$fg[yellow]%}-%{$fg[red]%}[%{$fg[cyan]%}%*%{$fg[red]%}]%{$reset_color%}%{$reset_color%}"$'\n'"%{$fg[white]%}└─>%{$reset_color%} " 
+
+else
+
+   #┌─[lswest@lswest-netbook:~]-[15:21:07] 
+   #└─> 
+   export PS1="%{$fg[white]%}┌─[%{$fg[green]%}%n%{$fg[cyan]%}@%{$fg[green]%}%m%{$fg[white]%}:%{$fg[yellow]%}%~%{$fg[white]%}]%{$fg[yellow]%}-%{$fg[red]%}[%{$fg[cyan]%}%*%{$fg[red]%}]%{$reset_color%}%{$reset_color%}"$'\n'"%{$fg[white]%}└─>%{$reset_color%} " 
+
+fi
+
+这是Z-shell的提示符，所以这样对Bash无效，但至少可以让你知道我们要如何使用它。事实上，这个文件会检查$WINDOW返回一个值，如果有的话，就将其显示到提示符处，反之则不。注释的部分显示提示的其他样子。我发现使用screen的时候这还真是一个有用的好东西。
+
+本期要谈到的最后一件事情就是创建一个.screenrc文件，这样就可以改变Screen的默认设置了。我的.screenrc文件如下（大部分是基于ArchLinux论坛上rson的.screenrc）：
+
+   1. Screenrc - Screen config file
+   2. Author: Lswest
+   3. Created: 24-11-2009 16:08:50
+   4.
+5.
+
+   1. General Settings 
+
+startup_message off # Disable startup message vbell on # Give visual alert instead of sound defutf8 on # Always use utf8
+
+   1. Hardstatus 
+
+backtick 10 1 300 "/usr/bin/updateCheck" # List number of available updates
+
+   1. 0 Zsh 1 IRC --INSERT-- No Packages to Update 
+
+hardstatus alwayslastline "%{= dd}%-w%{+u}%n %t%{-}%+w %=%{= dW}%h%{-}%20`%10`"
+
+   1. autostart screen sessions 
+
+screen -t Zsh 0 /bin/zsh screen -t IRC 1 /usr/bin/irssi
+
+1.
+
+“hardstatus alwayslastline”上面的注释是最后结果的一个例子。其他命令也有很好的注释。最后的Screen看起来像这样： [image]
+
+这是一个基本的.screenrc文件，即使是讨论一半这些设置的内容都需要两篇或更多的文章，所以我们现在就保持.screenrc文件带注释的样子，后面会有一篇文章解释.screenrc所有可能设置。
+
+本文中最后要说的就是如何退出screen。这个可以通过下面两种方法来实现：
+
+1. ctrl + a, \ - 退出screen并结束所有窗口
+
+2. 关闭除了shell的所有窗口，输入：
+
+exit
+
+如有有人有更多问题，或者想看到一篇设计screen某一方面内容的文章，发邮件至lswest34@gmail.com。关于文章的设想和关于CLI的问题也可以发送邮件到上面的地址。祝大家新年快乐，假期愉快。
+
+扩展阅读: http://www.gnu.org/software/screen/manual/html_node/Default-Key-Bindings.html#Default-Key-Bindings – GNU主页上的快捷键帮助 http://www.math.utah.edu/docs/info/screen_9.html – 有关.screenrc文件和Screen的简短但准确的指南 

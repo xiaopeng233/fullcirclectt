@@ -1,0 +1,26 @@
+InstallChromium
+
+如果你想尝试某个版本的GoogleChrome或者开源的Chromium，我极力推荐你试一试。为了帮助你使用Chrome，以下教程将全程指导你安装并运行由LaunchPad.net上的个人软件包档案（PPA）提供的Chromium每日更新版本。这篇教程浅显易懂，其中的所有信息都能在LaunchPad的PPA页面（https://launchpad.net/~chromiumdaily/+archive/ppa）上找到。如果你从来没从PPA安装过软件包，那你要做的第一件事情是更新你的软件源列表。为了使这篇教程更加简单明了，我将按照Ubuntu软件源的用户界面来说明整个过程，不过你应该明白通过终端来更新sources.list很容易。
+
+要把PPA的Chromium软件包加入你的源，你需要注意以下两行：
+
+debhttp://ppa.launchpad.net/chromiumdaily/ppa/ubuntukarmicmain
+debsrchttp://ppa.launchpad.net/chromiumdaily/ppa/ubuntukarmicmain
+
+好了，想要把这些软件包的源添加到你的源列表，只要点击：系统>管理>软件源。接着选择“其他软件”选项卡。
+
+进入以后，点击“添加...”按钮，然后在“APT”文本框中，输入上面两行中的第一行（记得你要将其中的“karmic”替换成你的Ubuntu的版本）。然后再同样添加第二行。现在你已经完成了获取Chromium软件包所要做的事了。
+
+如果仅仅这么做，你在每次更新你的软件列表时都会很烦，因为不做一些简单的验证，Ubuntu无法轻易地信任这个你新增的第三方源。为了避免这种情况，你需要通过匹配的GPG密钥来验证这个源。这一过程可以通过用户界面来完成，不过说实话，这一步要是通过终端完成会方便好多。只要打开你的常用终端，执行以下命令：
+
+sudoaptkeyadvrecvkeyskeyserverkeyserver.ubuntu.com4E5E17B5
+
+这样就好了。接着通过“软件源”应用程序或者在终端简单地执行aptgetupdate来更新你的软件列表。然后执行下面的命令安装Chromium：
+
+sudoaptgetinstallchromiumbrowser
+
+好了，这条命令执行完毕，你的Ubuntu已经拥有了当今最好的浏览器之一的Chromium了。如果你用的正好是Karmic，你可以在终端执行下面这条简单的命令来添加一个新的软件源并加入密钥：
+
+sudoaddaptrepositoryppa:chromiumdaily
+
+好了，这样就装好了，拙作到此为止。

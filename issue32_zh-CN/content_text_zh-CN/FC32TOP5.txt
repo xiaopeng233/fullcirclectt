@@ -1,0 +1,54 @@
+ Top 5 Media Centers
+
+Moovida
+
+http://www.moovida.com/
+
+
+Moovida可能是最早开源的播放器。其前身为Elisa，这个基于GStreamer的程序对于影音发烧友而言是个非常不错的选择。 Moovida不仅支持标准的影音格式，同时还支持各种基于Internet的在线视频，如Youtube，Apple Movie Trailers和其他的一些新闻网站，这也是它最具魅力的地方。它的界面简洁亮丽，而且支持外置的影音设备以及电视信号输出。
+
+
+在Ubuntu中安装Moovida，可以使用universe库中到moovida包直接安装。
+
+Entertainer
+
+http://entertainer-project.com/
+
+
+如果Moovida不能满足你的要求，那么可以尝试下Entertainer。这个基于GTK和GStreamer的播放器是用 Python编写的，虽然界面并不那么友好，但运行起来的OpenGL窗口简洁亮丽。Entertainer相比Moovida而言扩展性和易用性并不好，但其播放功能做得非常好。
+
+
+Entertainer可以用通过添加网址为http://url.fullcirclemagazine.org /abb068的PPA来安装。在写这篇文章的时候，由于一些开发包的问题，已经不再包含Karmic的软件仓库中了，具体内容可以参考http: //url.fullcirclemagazine.org/8026c9。
+
+
+XBMC
+
+http://xbmc.org/
+
+
+XBMC最初只是Xbox平台的一个修改版，随着它的逐渐流行，出现了使用用户更多PC版。之所以会出现这种情况的原因是，XBMC拥有强大的插件系统，社区里热心的志愿者积极的开发用于播放所有视频的插件。XBMC的脚本平台也很强大，意味着我们可以使用各种很酷的基于Python的新奇产品。
+
+
+在Ubuntu中安装XBMC，需要添加网址为http://url.fullcirclemagazine.org/d30a6a的PPA。
+
+
+Boxee
+
+http://www.boxee.tv/
+
+
+Boxee是一个基于XBMC的应用广泛的免费播放器。它继承了XBMC所有的优点，同时支持如YouTube，Blip.tv，Last.fm，Flickr和Picasa等Web 2.0站点。另外，它也支持多用户观看，这样用户就可以和朋友一起观看视频。
+
+
+好消息是Boxee提供了Ubuntu库，具体内容见http://url.fullcirclemagazine.org/bf34a2。坏消息是目前并不支持Karmic。当然，也可以尝试安装Jaunty版本的文件，但不鼓励这么做。
+
+Mythbuntu
+
+http://www.mythbuntu.org/
+
+
+如果上述软件仍然不能满足要求，而你正在寻找功能更为强大的播放器时，推荐使用Mythbuntu。它基于Xfce和Ubuntu，使用MythTV播放器作为其主应用程序。这意味着该软件继承了MythTV所有的健壮性，包括在很多其他播放器上无法找到的电视频道。
+
+
+有两种不同的方式来安装Mythbuntu。第一种方式是将其作为一个独立的操作系统来安装，另外一种则可参考http://www.mythbuntu.org/existing-ubuntu中给出的方法来将Mythbuntu包安装在已有的系统中。
+
