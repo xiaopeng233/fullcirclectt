@@ -1,0 +1,162 @@
+旁白额外翻译：
+
+1、
+ubuntu games:
+
+Ed Hewitt, aka chewit (when playing games), is a keen PC gamer and sometimes enjoys console gaming. He is also on the development team for the Gfire project (Xfire Plugin for Pidgin) 
+
+翻译：
+Ed_Hewitt（游戏中自称aka_chewit），是一位资深的PC游戏爱好者，有时也玩一些控制台类游戏。他是Gfire项目（用于Pidgin的Xfire插件）开发组的一员。
+
+2、
+Q来A去
+If you have Ubuntu-related questions, email them to: questions@fullcirclemagazine.org, and Tommy will answer them in a future issue. Please include as much information as you can about your problem.
+
+翻译：
+如果你有任何与Ubuntu有关的问题，请把它们电邮到：
+questions@fullcirclemagazine.org。Tommy将会在下一期的杂志中予以回答。请尽可能详尽的附列同你的问题有关的信息，以便其回答。
+
+3、
+我的桌面
+Your chance to show the world your desktop or PC. Email your screenshots and photos to: misc@fullcirclemagazine.org and include a brief paragraph about your desktop, your PC's specs and any other interesting tidbits about your setup.
+
+翻译：
+展示你的桌面或电脑的舞台。把截图和照片发送到：
+misc@fullcirclemagzzine.org，并且包括一段文字，用来描述你的桌面、电脑配置和其他与你电脑有关的花絮。
+
+4、
+THE INDEPENDENT MAGAZINE FOR THE UBUNTU LINUX COMMUNITY
+翻译：
+独立发行的ubuntu社区杂志
+
+5、
+第32期 — 2009年12月
+
+6、
+top five media centers
+5个最流行的媒体播放器
+
+7、
+full circle magazine is neither affiliated with, nor endorsed by, Canonical Ltd.
+full circle 杂志与Canonical有限公司没有任何附属或支持的关系。
+
+8、
+本杂志中包含的所有文字和图片按照Creative_Commons_Attribution=Share_Alike_3.0_Unported许可协议发布。这意味着您可以采用、拷贝、分发、和传播所有文章，但是要在遵守以下条件的前提下分发本作品：你必须以某种方式保留原作者署名（包含姓名、E=mail或者网址），并保留本杂志名称（Full=Circle）和网址www.fullcirclemagazine.org(但不得以任何方式暗示其为你或你使用该著作的方式背书)。如果你改变、转换本作品或者以本作品为基础进行创作，你只能采用与本协议相同、相近或者相容的许可协议发布基于本作品的演绎作品。
+Full Circle杂志完全独立于Ubuntu项目的赞助商==Canonical公司，并且杂志中的观点和想法不应当被认作为获得了Canonical公司的认可。
+
+9、
+Read how Ubuntu is used in Autism classes, and how one woman became an Ubuntu woman.
+关于一位老师如何将Ubuntu用在一个有自闭症的学生的班级中，以及她成为一名Ubuntu女士的经历。
+
+10、
+One recurrent problem was the display in OpenOffice...
+一个常见问题是OpenOffice的显示问题...
+
+11、
+We women generally like to get our teeth into a problem...
+我们女士一般喜欢深究一个问题...
+
+12、
+This issue - Andreas Wenning who is currently working in Thailand.
+本期将介绍Andreas Wenning，他目前在泰国工作。
+
+13、
+This magazine was created using :
+本杂志基于以下软件创建：
+
+14、
+What is Ubuntu?
+Ubuntu is a complete operating system that is perfect for laptops, desktops and servers. Whether at home, school or work, Ubuntu contains all the applications you'll ever need including word processor, email application and web browser.
+Ubuntu is and always will be free of charge. You do not pay any licensing fees. You can download, use and share Ubuntu with your friends, family, school or business, for absolutely nothing.
+Once installed, your system is ready to use with a full set of productivity, internet, drawing and graphics applications, and games.
+
+什么是Ubuntu：Ubuntu是一份完整的计算机操作系统，可以完美地运行在笔记本、台式机和服务器上。无论在家里、学校或是在办公室里，Ubuntu都包含所有你要用到的应用程序，如字处理、电子邮件程序和Web浏览器。
+
+Ubuntu是免费的，现在是而且永远都将是。你无需支付任何的授权费用。你完全可以自由地下载、使用并且和你的朋友、家人以及学校一起共享Ubuntu，乃至商业应用。
+
+一旦安装完成，你的系统即可投入使用，并拥有完整的生产力办公套件、互联网应用、图形图像处理程序以及游戏娱乐。
+
+15、
+Sabayon Linux 5.1 "Gaming" Edition arrives
+
+Sabayon Linux founder Fabio Erculiani has announced the availability of a "Gaming" Edition of version 5.1 of his popular Linux distribution. Sabayon [..] is intended to provide a "complete out-of-the-box experience" while being both stable and versatile.
+
+The [...] release is based on Sabayon Linux 5.1 GNOME and features [...] turn-based tactical strategy game called Battle for Wesnoth, the Warsow first person shooter and a 2D platformer called Wormux. The turn-based artillery game Scorched 3D and OpenArena first person shooter based on the Quake 3 engine are also included. Erculiani hopes that the release, which he says "comes straight from the North Pole", will make sure that no one gets "bored during this holiday time".
+
+More details about the release, including a full list of games, can be found in the original release announcement and list of packages. Sabayon Linux 5.1 "Gaming" Edition is available to download for 32-bit systems.
+
+Source: h-online.com
+Sabayon Linux 5.1游戏版来了
+Sabayon Linux的创始人Fabio Erculiani宣布提供他的流行Linux发行版Sabayon Linux 5.1“游戏”版本。Sabayon这个名字来源于用意大利的一种菜，使用蛋黄做的一种甜品。它基于 Gentoo Linux以及提供一个完整的即开即用的体验。
+
+这个稳定的游戏版本基于Sabayon Linux 5.1 GNOME以及包含了若干个自由和开源游戏。游戏包括回合制战术策略游戏韦诺之战， 第一人称射击游戏Warsow ，2D 平台游戏百战天虫。 基于策略的射击游戏Scorched 3D 和 OpenArena第一人称射击也包括了Quake 3引擎。 Erculiani 希望这些版本给那些无聊的人度过快乐的假期。
+
+更多详细信息，请查看版本说明以及软件包列表。 Sabayon Linux 5.1 “Gaming” 版本也提供了32位系统下载。
+来源: h-online.com
+
+16、
+Joker Racer R/C Server
+Joker Racer R/C服务器
+
+17、
+Greg Walters is owner of RainyDay Solutions, LLC, a consulting company in Aurora, Colorado, and has been programming since 1972. He enjoys cooking, hiking, music, and spending time with his family. 
+Greg Walters是RainyDay解决方案有限责任公司的拥有者，该公司是一个位于科罗拉多州奥罗拉的咨询公司，他从1972年起从事编程，他喜欢烹饪、徒步旅行、音乐以及和家人在一起。
+
+18、
+my story
+我的故事
+
+19、
+Written by
+作者
+
+20、
+my opinion
+我的观点
+
+21、
+Time To Review The Release Schedule?
+是否应该反思Ubuntu的发布计划？
+
+22、
+Will Linux Ever Get It Right?
+
+23、
+music player daemon
+音乐播放服务器
+
+24、
+review
+回顾：音乐播放服务器
+
+25、
+Will Linux Ever Get It Right?
+linux会改变这些问题吗？
+
+26、
+MOTU访谈
+
+27、
+taken from
+转载自：
+
+28、
+Behind MOTU is a site featuring interviews with those known as 'Masters of the Universe' (MOTU). They are the volunteer army of package maintainers who look after the Universe and Multiverse software repositories.
+"Behind MOTU"是一个专注于对MOTU进行采访的站点。他们是Universe and Multiverse软件库的包维护者身后的一支“志愿军”。
+
+29、
+MOTU INTERVIEW: RODERICK GREENING
+MOTU访谈：RODERICK GREENING
+
+30、
+letters
+读者来信
+
+31、
+Every month we like to publish some of the emails we receive. If you would like to submit a letter for publication, compliment or complaint, please email it to: letters@fullcirclemagazine.org. PLEASE NOTE: some letters may be edited for space reasons.
+每个月我们都要发布一些我们收到的读者来信。如果你也想提交关于本杂志出版、感谢抑或是抱怨的信件，请把它电邮到:_letters@fullcirclemagazine.org.
+特请注意：由于排版空间的限制，你的信件可能被裁剪编排。
+
+32、
+Ubuntu women
+Ubuntu女士Emma Jane Hogbin访谈
