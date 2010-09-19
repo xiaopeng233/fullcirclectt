@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+	<template category="Own Templates">
+		<name>FC_basic_left</name>
+		<file>Document-1.sla</file>
+		<tnail>FC_basic_lefttn.png</tnail>
+		<img>FC_basic_left.png</img>
+		<psize>A4, portrait</psize>
+		<color></color>
+		<descr></descr>
+		<usage></usage>
+		<scribus_version>1.3.3.2</scribus_version>
+		<date>2007-03-31</date>
+		<author></author>
+		<email></email>
+	</template>
+</templates>
